@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <h2>Welcome!</h2>
+    {% if content == Undefined %}
+        <p>This is the homepage</p>
+    {% else %}
+        <p>Name of {{content}}</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock%}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"> 
+</head>
+<body>
+    <nav class="nav">
+        <div class="container row">
+            <ul class="nav__list nav__list--primary row">
+                <li class="nav__item"><a href="{{ url_for('home')}}" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="{{ url_for('home')}}" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="{{ url_for('address') }}" class="nav__link">Contact</a></li>
+            </ul>
+            <ul class="nav__list row">
+                {% if session["username"] %}
+                    <li class="nav__item"><a href="{{ url_for('logout')}}" class="nav__link nav__link--button">Log Out</a></li>
+                {% else %}
+                    <li class="nav__item"><a href="{{ url_for('login')}}" class="nav__link nav__link--button">Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Fig's Address Book</h1>
+        {% block header %}{% endblock %}
+        {% for msg in get_flashed_messages() %}
+            <div class="flash"><p>{{ msg }}</p></div>
+        {% endfor %}
+        
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
